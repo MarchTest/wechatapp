@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fisher.mapper.MerchandiseMapper" >
+  <resultMap id="BaseResultMap" type="com.fisher.pojo.Merchandise" >
+    <id column="merchandise_id" property="merchandiseId" jdbcType="INTEGER" />
+    <result column="merchandise_name" property="merchandiseName" jdbcType="VARCHAR" />
+    <result column="merchandise_price" property="merchandisePrice" jdbcType="DOUBLE" />
+    <result column="merchandise_attribute" property="merchandiseAttribute" jdbcType="VARCHAR" />
+    <result column="merchandise_priceScope" property="merchandisePricescope" jdbcType="VARCHAR" />
+    <result column="merchandise_inventory" property="merchandiseInventory" jdbcType="INTEGER" />
+    <result column="merchandise_time" property="merchandiseTime" jdbcType="VARCHAR" />
+    <result column="clazz_id" property="clazzId" jdbcType="INTEGER" />
+    <result column="isPromotion" property="ispromotion" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    merchandise_id, merchandise_name, merchandise_price, merchandise_attribute, merchandise_priceScope, 
+    merchandise_inventory, merchandise_time, clazz_id, isPromotion
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from merchandise
+    where merchandise_id = #{merchandiseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from merchandise
+    where merchandise_id = #{merchandiseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fisher.pojo.Merchandise" >
+    insert into merchandise (merchandise_id, merchandise_name, merchandise_price, 
+      merchandise_attribute, merchandise_priceScope, 
+      merchandise_inventory, merchandise_time, 
+      clazz_id, isPromotion)
+    values (#{merchandiseId,jdbcType=INTEGER}, #{merchandiseName,jdbcType=VARCHAR}, #{merchandisePrice,jdbcType=DOUBLE}, 
+      #{merchandiseAttribute,jdbcType=VARCHAR}, #{merchandisePricescope,jdbcType=VARCHAR}, 
+      #{merchandiseInventory,jdbcType=INTEGER}, #{merchandiseTime,jdbcType=VARCHAR}, 
+      #{clazzId,jdbcType=INTEGER}, #{ispromotion,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fisher.pojo.Merchandise" >
+    insert into merchandise
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merchandiseId != null" >
+        merchandise_id,
+      </if>
+      <if test="merchandiseName != null" >
+        merchandise_name,
+      </if>
+      <if test="merchandisePrice != null" >
+        merchandise_price,
+      </if>
+      <if test="merchandiseAttribute != null" >
+        merchandise_attribute,
+      </if>
+      <if test="merchandisePricescope != null" >
+        merchandise_priceScope,
+      </if>
+      <if test="merchandiseInventory != null" >
+        merchandise_inventory,
+      </if>
+      <if test="merchandiseTime != null" >
+        merchandise_time,
+      </if>
+      <if test="clazzId != null" >
+        clazz_id,
+      </if>
+      <if test="ispromotion != null" >
+        isPromotion,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merchandiseId != null" >
+        #{merchandiseId,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiseName != null" >
+        #{merchandiseName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandisePrice != null" >
+        #{merchandisePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="merchandiseAttribute != null" >
+        #{merchandiseAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandisePricescope != null" >
+        #{merchandisePricescope,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandiseInventory != null" >
+        #{merchandiseInventory,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiseTime != null" >
+        #{merchandiseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="clazzId != null" >
+        #{clazzId,jdbcType=INTEGER},
+      </if>
+      <if test="ispromotion != null" >
+        #{ispromotion,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fisher.pojo.Merchandise" >
+    update merchandise
+    <set >
+      <if test="merchandiseName != null" >
+        merchandise_name = #{merchandiseName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandisePrice != null" >
+        merchandise_price = #{merchandisePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="merchandiseAttribute != null" >
+        merchandise_attribute = #{merchandiseAttribute,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandisePricescope != null" >
+        merchandise_priceScope = #{merchandisePricescope,jdbcType=VARCHAR},
+      </if>
+      <if test="merchandiseInventory != null" >
+        merchandise_inventory = #{merchandiseInventory,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiseTime != null" >
+        merchandise_time = #{merchandiseTime,jdbcType=VARCHAR},
+      </if>
+      <if test="clazzId != null" >
+        clazz_id = #{clazzId,jdbcType=INTEGER},
+      </if>
+      <if test="ispromotion != null" >
+        isPromotion = #{ispromotion,jdbcType=INTEGER},
+      </if>
+    </set>
+    where merchandise_id = #{merchandiseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fisher.pojo.Merchandise" >
+    update merchandise
+    set merchandise_name = #{merchandiseName,jdbcType=VARCHAR},
+      merchandise_price = #{merchandisePrice,jdbcType=DOUBLE},
+      merchandise_attribute = #{merchandiseAttribute,jdbcType=VARCHAR},
+      merchandise_priceScope = #{merchandisePricescope,jdbcType=VARCHAR},
+      merchandise_inventory = #{merchandiseInventory,jdbcType=INTEGER},
+      merchandise_time = #{merchandiseTime,jdbcType=VARCHAR},
+      clazz_id = #{clazzId,jdbcType=INTEGER},
+      isPromotion = #{ispromotion,jdbcType=INTEGER}
+    where merchandise_id = #{merchandiseId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 以下为自定义sql -->
+    <select id="selectBykeyWords" resultMap="BaseResultMap" parameterType="com.fisher.pojo.Merchandise" >
+    select 
+    <include refid="Base_Column_List" />
+    from merchandise
+    where
+     <trim suffixOverrides="," >
+      <if test="merchandiseId != null" >
+        merchandise_id like   concat("%",#{merchandiseId},"%"),
+      </if>
+      <if test="merchandiseName != null" >
+        merchandise_name like concat("%",#{merchandiseName},"%"),
+      </if>
+      <if test="merchandiseAttribute != null" >
+        merchandise_attribute like concat("%",#{merchandiseAttribute},"%"),
+      </if>
+    
+      <if test="merchandiseInventory != null" >
+        merchandise_inventory like concat("%",#{merchandiseInventory},"%"),
+      </if>
+    </trim>
+  </select>
+   <select id="selectByPromotionKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from merchandise
+    where
+     ispromotion = #{promotion} 
+  </select>
+     <select id="selectByClazzId" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from merchandise
+    where
+     clazz_id = #{clazzId} 
+  </select>
+  
+  
+  <select id="selectByPrice" resultMap="BaseResultMap" parameterType="double">
+  
+   select 
+    <include refid="Base_Column_List" />
+    from merchandise
+    where
+     merchandise_price <![CDATA[>=]]> #{low}
+     and
+      merchandise_price <![CDATA[<=]]> #{high}
+  
+  
+  </select>
+</mapper>

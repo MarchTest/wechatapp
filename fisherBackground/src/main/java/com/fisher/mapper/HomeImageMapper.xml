@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fisher.mapper.HomeImageMapper" >
+  <resultMap id="BaseResultMap" type="com.fisher.pojo.HomeImage" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="merchandise_id" property="merchandiseId" jdbcType="INTEGER" />
+    <result column="imagePath" property="imagepath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, merchandise_id, imagePath
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from homeimage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from homeimage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fisher.pojo.HomeImage" >
+    insert into homeimage (id, merchandise_id, imagePath
+      )
+    values (#{id,jdbcType=INTEGER}, #{merchandiseId,jdbcType=INTEGER}, #{imagepath,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fisher.pojo.HomeImage" >
+    insert into homeimage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="merchandiseId != null" >
+        merchandise_id,
+      </if>
+      <if test="imagepath != null" >
+        imagePath,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="merchandiseId != null" >
+        #{merchandiseId,jdbcType=INTEGER},
+      </if>
+      <if test="imagepath != null" >
+        #{imagepath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fisher.pojo.HomeImage" >
+    update homeimage
+    <set >
+      <if test="merchandiseId != null" >
+        merchandise_id = #{merchandiseId,jdbcType=INTEGER},
+      </if>
+      <if test="imagepath != null" >
+        imagePath = #{imagepath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fisher.pojo.HomeImage" >
+    update homeimage
+    set merchandise_id = #{merchandiseId,jdbcType=INTEGER},
+      imagePath = #{imagepath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 自定义sql -->
+  
+    <select id="getAllHomeImage" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from homeimage
+  </select>
+  
+  
+</mapper>

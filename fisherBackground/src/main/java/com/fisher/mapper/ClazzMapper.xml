@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fisher.mapper.ClazzMapper" >
+  <resultMap id="BaseResultMap" type="com.fisher.pojo.Clazz" >
+    <id column="clazz_id" property="clazzId" jdbcType="INTEGER" />
+    <result column="clazz_name" property="clazzName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    clazz_id, clazz_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from clazz
+    where clazz_id = #{clazzId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from clazz
+    where clazz_id = #{clazzId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fisher.pojo.Clazz" >
+    insert into clazz (clazz_id, clazz_name)
+    values (#{clazzId,jdbcType=INTEGER}, #{clazzName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fisher.pojo.Clazz" >
+    insert into clazz
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="clazzId != null" >
+        clazz_id,
+      </if>
+      <if test="clazzName != null" >
+        clazz_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="clazzId != null" >
+        #{clazzId,jdbcType=INTEGER},
+      </if>
+      <if test="clazzName != null" >
+        #{clazzName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fisher.pojo.Clazz" >
+    update clazz
+    <set >
+      <if test="clazzName != null" >
+        clazz_name = #{clazzName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where clazz_id = #{clazzId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fisher.pojo.Clazz" >
+    update clazz
+    set clazz_name = #{clazzName,jdbcType=VARCHAR}
+    where clazz_id = #{clazzId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <!-- 自定义sql -->
+  <select id="getAllClazz" resultMap="BaseResultMap">
+   select 
+    <include refid="Base_Column_List" />
+    from clazz
+  </select>
+</mapper>

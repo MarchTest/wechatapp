@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fisher.mapper.PathMapper" >
+  <resultMap id="BaseResultMap" type="com.fisher.pojo.Path" >
+    <id column="path_id" property="pathId" jdbcType="INTEGER" />
+    <result column="image_id" property="imageId" jdbcType="INTEGER" />
+    <result column="path_value" property="pathValue" jdbcType="VARCHAR" />
+    <result column="path_name" property="pathName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    path_id, image_id, path_value, path_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from path
+    where path_id = #{pathId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByImageKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from path
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </select>
+   <select id="selectString" resultType="string" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from path
+    where image_id = #{imageId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from path
+    where path_id = #{pathId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fisher.pojo.Path" >
+    insert into path (path_id, image_id, path_value, 
+      path_name)
+    values (#{pathId,jdbcType=INTEGER}, #{imageId,jdbcType=INTEGER}, #{pathValue,jdbcType=VARCHAR}, 
+      #{pathName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fisher.pojo.Path" >
+    insert into path
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pathId != null" >
+        path_id,
+      </if>
+      <if test="imageId != null" >
+        image_id,
+      </if>
+      <if test="pathValue != null" >
+        path_value,
+      </if>
+      <if test="pathName != null" >
+        path_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pathId != null" >
+        #{pathId,jdbcType=INTEGER},
+      </if>
+      <if test="imageId != null" >
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="pathValue != null" >
+        #{pathValue,jdbcType=VARCHAR},
+      </if>
+      <if test="pathName != null" >
+        #{pathName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fisher.pojo.Path" >
+    update path
+    <set >
+      <if test="imageId != null" >
+        image_id = #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="pathValue != null" >
+        path_value = #{pathValue,jdbcType=VARCHAR},
+      </if>
+      <if test="pathName != null" >
+        path_name = #{pathName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where path_id = #{pathId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fisher.pojo.Path" >
+    update path
+    set image_id = #{imageId,jdbcType=INTEGER},
+      path_value = #{pathValue,jdbcType=VARCHAR},
+      path_name = #{pathName,jdbcType=VARCHAR}
+    where path_id = #{pathId,jdbcType=INTEGER}
+  </update>
+</mapper>
