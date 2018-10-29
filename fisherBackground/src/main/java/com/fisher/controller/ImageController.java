@@ -1,6 +1,9 @@
 package com.fisher.controller;
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,16 @@ public class ImageController {
     @RequestMapping("/getImage")
     public byte[] getImages(HttpServletResponse response,String path){
     	 System.out.println("路径:"+path);
+    	String ext=path.substring(path.lastIndexOf("."));
+    	Set<String> allows=new HashSet<String>();
+    	allows.add(".jpg");
+    	allows.add(".png");
+    	allows.add(".gif");
+    	allows.add(".jpeg");
+    	System.out.println("后缀:"+ext);
+    	if(!allows.contains(ext)){
+    		return "not allowed".getBytes();
+    	}
     	if(path==null||"".equals(path.trim())){
     		//微信小程序页面跳转老是发送2次请求,第一次不带path的路径,第二次会带有path
     		//通过wx:navigation函数他就只发送第一次不带参数的请求,为什么????

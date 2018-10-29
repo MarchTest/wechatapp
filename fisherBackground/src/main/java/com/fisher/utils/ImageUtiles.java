@@ -12,6 +12,9 @@ public class ImageUtiles {
      
         try { 
             File file=ResourceUtils.getFile("classpath:images/"+path);
+            if(!file.exists()){
+            	return null;
+            }
             FileInputStream image=new FileInputStream(file);
             if(image!=null){
                 //获取图片大小
